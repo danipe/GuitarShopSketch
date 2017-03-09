@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+
+    <script src="https://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!--
+      El siguiente link asocia nuestra stylesheet personalizada y to guapa a nuestro html
+    -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="profile.css">
+    <!--
+      Este script está escrito en jQuery, un framework de javascript, con esto lo que hago es controlar las animaciones del principio
+      y la animacion de cambiar de informacion de guitarra.
+
+      Para usarlo es muy facil, la sintaxis es '$.(elemento).funcion()', de este modo para esconder el div con id 'prueba' es
+      tan facil como $.('#prueba').hide()
+
+      Lo de $.when().then() sirve para hacer una animacion y cuando acabe hacer otra, si no se desmonta toda la pagina
+    -->
+    <script type="text/javascript">
+    //document.ready nos sirve para crear la animacion del principio, a la cual le ponemos un retraso de 2 segundos para simular
+    //el tiempo de carga del principio de una pagina, no es que tarde tanto en cargar
+      $(document).ready(function(){
+        $('#blackscreen').addClass('animated');
+        $.when($('.loader-div').delay(2000).fadeOut(1000)).then(function(){
+          $('.content').fadeIn(1000);
+        });
+        //img.click para crear un eventListener a cada imagen, de este modo sabremos cuando se ha hecho click en una imagen
+        $('img').click(function(){
+          //nos guardamos el id de la imagen que se ha clickado
+          var info = $(this).attr('id');
+          $.when($('.guitar-info').fadeOut(300)).then(function() {
+            //despues de esconder el div que habia antes mostramos el div equivalente a la imagen que hemos clickado
+            switch(info){
+              case 'fenderCustom':
+                $('#fenderCustom-info').fadeIn(300);
+                break;
+              case 'fenderTele':
+                $('#fenderTele-info').fadeIn(300);
+                break;
+              case 'fenderJaguar':
+                $('#fenderJaguar-info').fadeIn(300);
+                break;
+              case 'gibsonLesPaul':
+                $('#gibsonLesPaul-info').fadeIn(300);
+                break;
+            }
+          }
+
+          );
+
+
+
+        });
+
+      });
+    </script>
+  </head>
+  <body>
+    <div id="blackscreen">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sg-">
+
+          </div>
+        </div>
+        <div class="row">
+          <!--
+            Este div de abajo es el circulo que aparece al principio, esta dentro de una columna propia porque tiene que estar en
+            el centro, si no saldría a la izquierda de la pantalla
+          -->
+            <div class="col-lg-2 col-lg-offset-5 loader-div top-margin" align=center>
+              <div class="loader">
+              </div>
+            </div>
+            <!--
+              El div content es el que aparece justo despues de que desaparezca el loader de arriba, dentro tiene la tabla
+              de articulos y el div de la derecha donde se muestra la informacion de cada guitarra
+            -->
+            <div class="content" hidden>
+                <div class="row">
+                  <div class="col-lg-5 col-lg-offset-1">
+                    <div class="panel-default">
+                      <div class="panel-heading">
+                        Artículos
+                      </div>
+                      <div class="panel-body">
+
+                        <table>
+                          <tr>
+                            <td class="left"><img id="fenderCustom" src="https://musicasa.files.wordpress.com/2013/07/fender-koa-ccde488ca3.png" width=70% ></td>
+                            <td class="right" align=right>Fender Pro Custom Classic Koa</td>
+                          </tr>
+                          <tr>
+                            <td><img id="fenderTele" src="https://s-media-cache-ak0.pinimg.com/originals/85/4d/5f/854d5fb85f16140d9f17b0e5e0d03841.jpg" width=70% ></td>
+                            <td align=right>Fender Telecaster Classic Wood</td>
+                          </tr>
+                          <tr>
+                            <td><img id="fenderJaguar" src="http://assets.fender.com/frl/e8f3efb4e38c4318dd43d775006c4f6e/generated/86ceb3c861ac3d7b0737b2ccde488ca3.png" width=70% ></td>
+                            <td align=right>Fender Jaguar Retro Blue</td>
+                          </tr>
+                          <tr>
+                            <td><img id="gibsonLesPaul" src="http://i1009.photobucket.com/albums/af213/TheBr0ken0ne/GibsonLesPaul--Guitar.png" width=70% ></td>
+                            <td align=right>Gibson Les Paul Standard</td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <!--
+                    Este div de abajo es el que contiene toda la informacion de cada guitarra, si te fijas, cada div tiene
+                    un atributo hidden, con esto evitamos que se muestre.
+
+                    De esta forma lo podemos controlar desde el jQuery de arriba con las funciones fadeIn y fadeOut, que son
+                    las funciones que hacen la animacion de este div.
+
+                    pd. El boton de compra no funciona
+                  -->
+                  <div class="col-lg-3 col-lg-offset-1">
+                    <div class="guitarInfo">
+                        <div id="guitarInfo" class="form-login guitar-info">
+                          Haz click en una guitarra<br>
+                          para ver detalles
+                        </div>
+                        <div id="fenderCustom-info" class="form-login guitar-info" hidden>
+                          Fender Pro Custom Classic Koa<br>
+                          <br>
+                          Marca: Fender<br>
+                          Modelo: Acoustic<br>
+                          Color: Caoba Wood<br>
+                          Estilo: Indie/Folk/Country<br>
+                          Precio: 700 €<br>
+                          <button type="button" class="login-button">Comprar</button>
+                        </div>
+                        <div id="fenderTele-info" class="form-login guitar-info" hidden>
+                          Fender Telecaster Classic Wood<br>
+                          <br>
+                          Marca: Fender<br>
+                          Modelo: Telecaster<br>
+                          Color: Fabric Wood<br>
+                          Estilo: Indie/Rock/Metal<br>
+                          Precio: 1000 €<br>
+                          <button type="button" class="login-button">Comprar</button>
+                        </div>
+                        <div id="fenderJaguar-info" class="form-login guitar-info" hidden>
+                          Fender Jaguar Retro Blue<br>
+                          <br>
+                          Marca: Fender<br>
+                          Modelo: Jaguar<br>
+                          Color: Classic blue<br>
+                          Estilo: Indie/Rock<br>
+                          Precio: 1200 €<br>
+                          <button type="button" class="login-button">Comprar</button>
+                        </div>
+                        <div id="gibsonLesPaul-info" class="form-login guitar-info" hidden>
+                          Gibson Les Paul Standard<br>
+                          <br>
+                          Marca: Gibson<br>
+                          Modelo: Les Paul<br>
+                          Color: Standard Style<br>
+                          Estilo: Cualquiera<br>
+                          Precio: 2400 €<br>
+                          <button type="button" class="login-button">Comprar</button>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+  </div>
+  </body>
+</html>

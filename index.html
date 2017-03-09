@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Inicia sesion</title>
+    <!--
+      Aquí en el head incluyo un puñao de cosas necesarias para implementar bootstra, que es un framework de js html y css usado
+      por casi todo el mundo, practicamente porque se puede estructurar la pagina tan facil que asusta.
+      Todo este codigo lo coges de la pagina de bootstrap.
+    -->
+    <script src="https://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!--
+      El siguiente link asocia nuestra stylesheet personalizada y to guapa a nuestro html
+    -->
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript">
+      function submit(){
+        var user = $('#form-name').val();
+        var pass = $('#form-pass').val();
+        var username = 'Rosa';
+        var password = 'Bestprofe';
+        if(user==username && pass==password){
+          window.location.replace("profile.html")
+        }else{
+          $('#myModal').modal();
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <!--
+      Vale aqui hay que tener claras un par de cosas, primero tenemos el blackscreen que nos sirve para oscurecer la imagen del
+      fondo.
+
+      Despues ya empezamos a utilizar bootstrap para estructurar la pagina, primero creamos un container-fluid que no tiene
+      otra funcion mas que agrupar todo lo que vamos a usar y ademas no tiene un tamaño fijo.
+
+      Empezamos añadiendo un row, es decir, una fila, y dentro de esa fila metemos una columna.
+
+      Cada fila tiene un maximo de 12 columnas de 1 de ancho, de este modo, la primera columna tiene un ancho de 8(col-lg-8) y un margen
+      de 2(col-lg-offset-2), así que el div se centra porque el grosor (8) mas los margenes de los lados(2 y 2) no dejan con un total
+      de 12.
+
+      El lg se pone porque estamos diseñando esta pagina para escritorio, con bootstrap podemos decirle si la pantalla es de
+      escritorio (lg), tablet(md) o movil(sm).
+
+      Y por lo demás nada mas, tiene 2 filas, la segunda con un margen de arriba de 20%, y cada fila tiene una sola columna en el
+      centro, solo que cada una tiene un ancho diferente.
+
+      Si ves que algo no te queda claro prueba a cambiarlo para ver que hace o me avisas.
+    -->
+    <div id="blackscreen">
+      <div class="container-fluid">
+
+          <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 " align=center>
+                <h1>BIENVENIDO</h1>
+                Por favor, inicia sesión
+            </div>
+          </div>
+
+          <div class="row top-margin">
+            <div class="col-lg-6 col-lg-offset-3" align="center">
+              <input type="text" id='form-name' name="name" class="form-login" placeholder="Nombre de usuario"/><br>
+                <br>
+              <input type="password" id='form-pass' name="pass" class="form-login" placeholder="Contraseña"/><br>
+                <br>
+              <button type="button" class="login-button" onclick="submit()">
+                Iniciar sesión
+              </button>
+            </div>
+          </div>
+
+      </div>
+    </div>
+    <div class="modal fade" id="myModal" role="dialog">
+      <div class="row">
+        <div class="col-lg-6 col-lg-offset-3" align="center">
+          <div class = "form-login top-margin">
+            USUARIO O CONTRASEÑA INCORRECTOS <br>
+            <br>
+            Prueba con:<br>
+            <br>
+            User: Rosa<br>
+            Pass: Bestprofe<br>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
